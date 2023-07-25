@@ -1,9 +1,8 @@
 
-
-const myAnswer = prompt('Enter: "Rock", "Paper", or "Scissors".');
-
-const myAnswerFormatted = myAnswer.toLowerCase();
-
+// Keeping track of the global scores.
+let myScore = 0;
+let aiScore = 0;
+let gameLimit = 5;
 
 // a function to return a random result from the ai player .
 function getComputerChoice() {
@@ -15,15 +14,13 @@ function getComputerChoice() {
   return aiAnswerToLowerCase;
 }
 
-
 // a function to perform all the conditional logic and return a result to be displayed in an alert() or a console.log() function.
-
-function playAround(playerOne, aiPLayer) {
+function playRound(playerOne, aiPLayer) {
 
   let result;
 
   if (playerOne == 'rock' && aiPLayer == 'rock') {
-    result = "It's a tie! You've chosen the same!";
+    result = "It's a tie!";
   } 
   else if (playerOne == 'rock' && aiPLayer == 'scissors') {
     result = "You win! rock beats scissors!";
@@ -35,7 +32,7 @@ function playAround(playerOne, aiPLayer) {
     result = 'You win! paper beats rock!';
   }
   else if (playerOne == 'paper' && aiPLayer == 'paper') {
-    result = "It's a tie! You've chosen the same!";
+    result = "It's a tie!";
   }
   else if (playerOne == 'paper' && aiPLayer == 'scissors') {
     result = 'The AI player wins. scissors beats paper.';
@@ -47,7 +44,7 @@ function playAround(playerOne, aiPLayer) {
     result = 'You win! scissors beats paper.';
   }
   else if (playerOne == 'scissors' && aiPLayer == 'scissors') {
-    result = 'It is a tie! You have chosen the same!';
+    result = 'It is a tie!';
   }
   else {
     result = 'Wrong input, try again';
@@ -58,12 +55,64 @@ function playAround(playerOne, aiPLayer) {
   }
 
   return result;
+}
+
+//main function game
+function game() {
   
+  const myAnswer = prompt('Enter: "Rock", "Paper", or "Scissors".');
+  const myAnswerFormatted = myAnswer.toLowerCase();
+
+  let aRound = playRound(myAnswerFormatted, getComputerChoice());
+  alert(aRound);
+
+  // making some variables to hold occurence of words so I can compare them later
+  let occurenceOne = 'You';
+  let resultOne = aRound.includes(occurenceOne);
+
+  let occurenceTwo = 'The';
+  let resultTwo = aRound.includes(occurenceTwo);
+
+  // I am checking if those occurence variables are true, and increment global 'myScore' or 'aiScore'.
+  if (resultOne == true) {
+    myScore++ ;
+  }
+  else if (resultTwo == true) {
+    aiScore++ ;
+  }
+  
+  alert(`Your score: ${myScore}\nComputer score: ${aiScore}`);
+
+  // checking to see if i need to decrement or increment the global 'gameLimit' variable.
+  if (aRound == 'Wrong input, try again') {
+    gameLimit-- ;
+    gameLimit++ ;
+  } else {
+    gameLimit-- ;
+  }
+  
+
+  alert(`${gameLimit} rounds left!`);
+
+  // if/else conditionals check for end game.
+  if (myScore > aiScore && gameLimit == 0) {
+    alert('YOU WON!');
+  }
+  else if (myScore < aiScore && gameLimit == 0) {
+    alert('THE PC WON!');
+  }
+  else if (myScore == aiScore && gameLimit == 0) {
+    alert('It is a tie!');
+  }
 
 }
 
-// the official function call
+// the official function called 5 times since i suck at loops.
+game();
+game();
+game();
+game();
+game();
 
-alert(playAround(myAnswerFormatted, getComputerChoice()));
 
 

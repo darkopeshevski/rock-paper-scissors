@@ -64,7 +64,7 @@ function game() {
   const myAnswerFormatted = myAnswer.toLowerCase();
 
   let aRound = playRound(myAnswerFormatted, getComputerChoice());
-  alert(aRound);
+  console.log(aRound);
 
   // making some variables to hold occurence of words so I can compare them later
   let occurenceOne = 'You';
@@ -81,7 +81,7 @@ function game() {
     aiScore++ ;
   }
   
-  alert(`Your score: ${myScore}\nComputer score: ${aiScore}`);
+  console.log(`Your score: ${myScore}\nComputer score: ${aiScore}`);
 
   // checking to see if i need to decrement or increment the global 'gameLimit' variable.
   if (aRound == 'Wrong input, try again') {
@@ -92,17 +92,17 @@ function game() {
   }
   
 
-  alert(`${gameLimit} rounds left!`);
+  console.log(`${gameLimit} rounds left!`);
 
   // if/else conditionals check for end game.
   if (myScore > aiScore && gameLimit == 0) {
-    alert('YOU WON!');
+    console.log('YOU WON!');
   }
   else if (myScore < aiScore && gameLimit == 0) {
-    alert('THE PC WON!');
+    console.log('THE PC WON!');
   }
   else if (myScore == aiScore && gameLimit == 0) {
-    alert('It is a tie!');
+    console.log('It is a tie!');
   }
 
 }

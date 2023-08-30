@@ -1,0 +1,61 @@
+
+
+.mama {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Ensures the body takes up the full viewport height */
+  margin: 0; /
+}
+
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  
+}
+
+.other-results {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.buttons {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.answer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px; /* Expand to fill the container's height */
+  margin-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 30px;
+  width: 500px; /* Set a fixed width for the answer div */
+  border: 1px solid black;
+}
+
+.play-again {
+  width: 200px;
+  font-size: 40px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  align-self: center;
+  
+}

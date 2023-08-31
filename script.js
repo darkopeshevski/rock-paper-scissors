@@ -12,7 +12,6 @@ const answer = document.querySelector(".answer");
 const playerScore = document.querySelector(".my-score");
 const computerScore = document.querySelector(".ai-score");
 const limitOfGame = document.querySelector(".game-limit");
-const playAgainBtn = document.querySelector(".play-again");
 
 
 answer.textContent = "Please select one of the three items bellow to start the game.";
@@ -24,132 +23,14 @@ btnRock.addEventListener('click', function() {
   let roundPlayed = playRound(btnRockTextFormatted, computerChoice);
   answer.textContent = `The player chooses ${computerChoice}! ${roundPlayed}`;
 
-  // Getting an string occurence, that will decide if the player or pc score should be incremented or
-  let occurenceOne = 'You';
-  let resultOne = roundPlayed.includes(occurenceOne);
+  // Updating the player score and the PC score.
+  updateScores(roundPlayed);
 
-  let occurenceTwo = 'The';
-  let resultTwo = roundPlayed.includes(occurenceTwo);
+  // Updating how many rounds are left.
+  updateRoundsLeft(roundPlayed);
 
-  if (resultOne) {
-    myScore++ ;
-  }
-  else if (resultTwo) {
-    aiScore++ ;
-  }
-
-  playerScore.textContent = `Player score : ${myScore}`;
-  computerScore.textContent = `Computer score : ${aiScore}`;
-
-  if (roundPlayed === 'Wrong input, try again' || roundPlayed === "It's a tie!") {
-    // If it's a wrong input or it is a tie, the gameLimit remains unchanged.
-  } else {
-    gameLimit-- ;
-  }
-  limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-  // if/else conditionals check for END GAME.
-if (myScore > aiScore && gameLimit == 0) {
-  answer.textContent = "Congratulations, YOU WON!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-    
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-
-}
-else if (myScore < aiScore && gameLimit == 0) {
-  answer.textContent = "I'm sorry, YOU LOST! The PC won!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-  
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-}
-else if (myScore == aiScore && gameLimit == 0) {
-  answer.textContent = "IT IS A TIE!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-};
-
-  
+  // If/Else conditionals check for END GAME.
+  endGame(myScore, aiScore, gameLimit);
 });
 
 btnPaper.addEventListener('click', function() {
@@ -159,129 +40,14 @@ btnPaper.addEventListener('click', function() {
   let roundPlayed = playRound(btnPaperTextFormatted, computerChoice);
   answer.textContent = `The player chooses ${computerChoice}! ${roundPlayed}`;
 
-  let occurenceOne = 'You';
-  let resultOne = roundPlayed.includes(occurenceOne);
+  // Updating the player score and the PC score.
+  updateScores(roundPlayed);
 
-  let occurenceTwo = 'The';
-  let resultTwo = roundPlayed.includes(occurenceTwo);
+  // Updating how many rounds are left.
+  updateRoundsLeft(roundPlayed);
 
-  if (resultOne) {
-    myScore++ ;
-  }
-  else if (resultTwo) {
-    aiScore++ ;
-  }
-
-  playerScore.textContent = `Player score : ${myScore}`;
-  computerScore.textContent = `Computer score : ${aiScore}`;
-
-  if (roundPlayed === 'Wrong input, try again' || roundPlayed === "It's a tie!") {
-    // If it's a wrong input or it is a tie, the gameLimit remains unchanged.
-  } else {
-    gameLimit-- ;
-  }
-  limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-  // if/else conditionals check for END GAME.
-if (myScore > aiScore && gameLimit == 0) {
-  answer.textContent = "Congratulations, YOU WON!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-}
-else if (myScore < aiScore && gameLimit == 0) {
-  answer.textContent = "I'm sorry, YOU LOST! The PC won!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-}
-else if (myScore == aiScore && gameLimit == 0) {
-  answer.textContent = "IT IS A TIE!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-};
+  // If/Else conditionals check for END GAME.
+  endGame(myScore, aiScore, gameLimit);
 });
 
 btnScissors.addEventListener('click', function() {
@@ -291,11 +57,26 @@ btnScissors.addEventListener('click', function() {
   let roundPlayed = playRound(btnScissorsTextFormatted, computerChoice);
   answer.textContent = `The player chooses ${computerChoice}! ${roundPlayed}`;
 
+  // Updating the player score and the PC score.
+  updateScores(roundPlayed);
+
+  // Updating how many rounds are left.
+  updateRoundsLeft(roundPlayed);
+
+  // If/Else conditionals check for END GAME.
+  endGame(myScore, aiScore, gameLimit);
+});
+
+
+
+// a function that updates the variables myScore and aiScore (also the HTML element, visually) based of an occurence of a string.
+function updateScores(round) {
+
   let occurenceOne = 'You';
-  let resultOne = roundPlayed.includes(occurenceOne);
+  let resultOne = round.includes(occurenceOne); // this returrns true or false.
 
   let occurenceTwo = 'The';
-  let resultTwo = roundPlayed.includes(occurenceTwo);
+  let resultTwo = round.includes(occurenceTwo); // this returrns true or false.
 
   if (resultOne) {
     myScore++ ;
@@ -306,120 +87,95 @@ btnScissors.addEventListener('click', function() {
 
   playerScore.textContent = `Player score : ${myScore}`;
   computerScore.textContent = `Computer score : ${aiScore}`;
+}
 
-  if (roundPlayed === 'Wrong input, try again' || roundPlayed === "It's a tie!") {
+
+// A function that determines the endgame by taking the playerScore, aiScore and the gameLimit as arguments. "Play again" button is added at the end.
+function endGame(my_score, ai_score, game_limit) {
+
+  if (my_score > ai_score && game_limit == 0) {
+    answer.textContent = "Congratulations, YOU WON!";
+  
+    btnRock.disabled = true;
+    btnPaper.disabled = true;
+    btnScissors.disabled = true;
+  
+    const playAgainBtn = document.createElement("button");
+    playAgainBtn.className = "play-again";
+    playAgainBtn.textContent = "Play another game?";
+    document.querySelector(".mama").appendChild(playAgainBtn);
+      
+    playAgainBtn.addEventListener('click', playAgainButtonClicked);
+  }
+
+  else if (my_score < ai_score && game_limit == 0) {
+    answer.textContent = "I'm sorry, YOU LOST! The PC won!";
+  
+    btnRock.disabled = true;
+    btnPaper.disabled = true;
+    btnScissors.disabled = true;
+  
+    const playAgainBtn = document.createElement("button");
+    playAgainBtn.className = "play-again";
+    playAgainBtn.textContent = "Play another game?";
+    document.querySelector(".mama").appendChild(playAgainBtn);
+    
+    playAgainBtn.addEventListener('click', playAgainButtonClicked);
+  }
+
+  else if (my_score == ai_score && game_limit == 0) {
+    answer.textContent = "IT IS A TIE!";
+  
+    btnRock.disabled = true;
+    btnPaper.disabled = true;
+    btnScissors.disabled = true;
+  
+    const playAgainBtn = document.createElement("button");
+    playAgainBtn.className = "play-again";
+    playAgainBtn.textContent = "Play another game?";
+    document.querySelector(".mama").appendChild(playAgainBtn);
+  
+    playAgainBtn.addEventListener('click', playAgainButtonClicked);
+  };
+}
+
+// Play again button function.
+function playAgainButtonClicked() {
+  const existingPlayAgainBtn = document.querySelector(".play-again");
+
+  if (existingPlayAgainBtn) {
+    existingPlayAgainBtn.remove();
+  }
+
+  answer.textContent = "";
+
+  myScore = 0;
+  aiScore = 0;
+  gameLimit = 5;
+
+  btnRock.disabled = false;
+  btnPaper.disabled = false;
+  btnScissors.disabled = false;
+
+  playerScore.textContent = `Player score : ${myScore}`;
+  computerScore.textContent = `Computer score : ${aiScore}`;
+  limitOfGame.textContent = `Rounds left : ${gameLimit}`;
+
+  answer.textContent = "Please select one of the three items bellow to start the game.";
+}
+
+// A function to increment or decrement the gameLimit variable, and to update its HTML element.
+function updateRoundsLeft(round) {
+  if (round === 'Wrong input, try again' || round === "It's a tie!") {
     // If it's a wrong input or it is a tie, the gameLimit remains unchanged.
   } else {
     gameLimit-- ;
   }
   limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-  // if/else conditionals check for END GAME.
-if (myScore > aiScore && gameLimit == 0) {
-  answer.textContent = "Congratulations, YOU WON!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
 }
-else if (myScore < aiScore && gameLimit == 0) {
-  answer.textContent = "I'm sorry, YOU LOST! The PC won!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-}
-else if (myScore == aiScore && gameLimit == 0) {
-  answer.textContent = "IT IS A TIE!";
-
-  btnRock.disabled = true;
-  btnPaper.disabled = true;
-  btnScissors.disabled = true;
-
-  const playAgainBtn = document.createElement("button");
-  playAgainBtn.className = "play-again";
-
-  playAgainBtn.textContent = "Play another game?";
-  document.querySelector(".mama").appendChild(playAgainBtn);
-
-  playAgainBtn.addEventListener('click', function() {
-    playAgainBtn.remove();
-    answer.textContent = "";
-    
-    myScore = 0;
-    aiScore = 0;
-    gameLimit = 5;
-
-    btnRock.disabled = false;
-    btnPaper.disabled = false;
-    btnScissors.disabled = false;
-
-    playerScore.textContent = `Player score : ${myScore}`;
-    computerScore.textContent = `Computer score : ${aiScore}`;
-    limitOfGame.textContent = `Rounds left : ${gameLimit}`;
-
-    answer.textContent = "Please select one of the three items bellow to start the game.";
-
-  });
-};
-});
 
 
-
-
-// a function to return a random string result from the AI player .
+// A function to return a random string result from the AI player .
 function getComputerChoice() {
   const aiPlayerArray = ['Rock', 'Paper', 'Scissors'];
   const aiCalc = Math.floor(Math.random() * aiPlayerArray.length);

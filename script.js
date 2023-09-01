@@ -12,6 +12,7 @@ const answer = document.querySelector(".answer");
 const playerScore = document.querySelector(".my-score");
 const computerScore = document.querySelector(".ai-score");
 const limitOfGame = document.querySelector(".game-limit");
+let playAgainBtn;
 
 
 answer.textContent = "Please select one of the three items bellow to start the game.";
@@ -100,7 +101,7 @@ function endGame(my_score, ai_score, game_limit) {
     btnPaper.disabled = true;
     btnScissors.disabled = true;
   
-    const playAgainBtn = document.createElement("button");
+    playAgainBtn = document.createElement("button");
     playAgainBtn.className = "play-again";
     playAgainBtn.textContent = "Play another game?";
     document.querySelector(".mama").appendChild(playAgainBtn);
@@ -115,7 +116,7 @@ function endGame(my_score, ai_score, game_limit) {
     btnPaper.disabled = true;
     btnScissors.disabled = true;
   
-    const playAgainBtn = document.createElement("button");
+    playAgainBtn = document.createElement("button");
     playAgainBtn.className = "play-again";
     playAgainBtn.textContent = "Play another game?";
     document.querySelector(".mama").appendChild(playAgainBtn);
@@ -130,7 +131,7 @@ function endGame(my_score, ai_score, game_limit) {
     btnPaper.disabled = true;
     btnScissors.disabled = true;
   
-    const playAgainBtn = document.createElement("button");
+    playAgainBtn = document.createElement("button");
     playAgainBtn.className = "play-again";
     playAgainBtn.textContent = "Play another game?";
     document.querySelector(".mama").appendChild(playAgainBtn);
@@ -141,12 +142,8 @@ function endGame(my_score, ai_score, game_limit) {
 
 // Play again button function.
 function playAgainButtonClicked() {
-  const existingPlayAgainBtn = document.querySelector(".play-again");
-
-  if (existingPlayAgainBtn) {
-    existingPlayAgainBtn.remove();
-  }
-
+  
+  playAgainBtn.remove();
   answer.textContent = "";
 
   myScore = 0;
